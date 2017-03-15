@@ -1,0 +1,26 @@
+---
+layout: full-width
+title: Home
+description: Donald, the anglicized version of a Scottish or Irish name, means “world”, “rule”, or “power”.
+order: 1
+exclude_from_nav: true
+---
+
+  <ul class="content-listing ">
+    {% assign sorted_pages = site.pages | sort:"order" %}
+    {% for page in sorted_pages %}
+      {% if page.layout == "full-width" %}
+        {% unless page.exclude_from_nav %}
+        <li class="listing">
+          <hr class="slender">
+          <a href="{% if site.baseurl == "/" %}{{ page.url }}{% else %}{{ page.url | prepend: site.baseurl }}{% endif %}"><h3 class="contrast">{{ page.title }}</h3></a>
+          <br>
+          <div>{% if page.description %}{{ page.description | strip_html | truncatewords:50}}{% endif %}
+          <a class="read-more" href="{% if site.baseurl == "/" %}{{ page.url }}{% else %}{{ page.url | prepend: site.baseurl }}{% endif %}">[Read More]</a>
+          </div>
+
+        </li>
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  </ul>
